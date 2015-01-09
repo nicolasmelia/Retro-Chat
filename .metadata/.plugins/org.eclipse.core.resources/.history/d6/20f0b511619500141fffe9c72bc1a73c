@@ -25,18 +25,16 @@ public class Main {
 		System.out.print("Enter a Username: ");
 		userName =  System.console().readLine().toString().trim();
 	    
-
+		System.out.print("Enter Port(Number): ");
+		port =  System.console().readLine().toString().trim();
+	    
+		try {
+			Integer.parseInt(port);
+		} catch (Exception ex) {
+			System.out.print("Error: Port must be a number");
+		}
 
 	    if (choice.trim().matches("1")) {
-	    	
-			System.out.print("Enter Port(Number): ");
-			port =  System.console().readLine().toString().trim();
-		    
-			try {
-				Integer.parseInt(port);
-			} catch (Exception ex) {
-				System.out.print("Error: Port must be a number");
-			}
 	    
 			Server server = new Server(Integer.parseInt(port));
 			server.startServer();

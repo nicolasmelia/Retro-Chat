@@ -1,6 +1,8 @@
 package main;
 
 
+
+
 import connections.Client;
 import connections.Server;
  
@@ -8,7 +10,6 @@ public class Main {
 	
 	static String userName;
 	static String choice = null;
-	static String port;
 	
 	public static void main(String[] args) {
 			// TODO Auto-generated method stub
@@ -19,26 +20,16 @@ public class Main {
         System.out.print("Enter Selection: ");
         
         // Get option from user
+        while (choice == null) {
 	    choice =  System.console().readLine().toString().trim();
-
+        }
         
 		System.out.print("Enter a Username: ");
 		userName =  System.console().readLine().toString().trim();
 	    
-
-
 	    if (choice.trim().matches("1")) {
-	    	
-			System.out.print("Enter Port(Number): ");
-			port =  System.console().readLine().toString().trim();
-		    
-			try {
-				Integer.parseInt(port);
-			} catch (Exception ex) {
-				System.out.print("Error: Port must be a number");
-			}
 	    
-			Server server = new Server(Integer.parseInt(port));
+			Server server = new Server(4440);
 			server.startServer();
 			// Starts another thread to look for messages from client
 			server.start();
@@ -57,18 +48,9 @@ public class Main {
 	    	System.out.print("Enter the servers IP address: ");
 		    String ipAddress =  System.console().readLine().toString().trim();
 	
-			System.out.print("Enter the port number: ");
-		    port = System.console().readLine().toString().trim();
-		    
-			try {
-				Integer.parseInt(port);
-			} catch (Exception ex) {
-				System.out.print("Error: Port must be a number");
-			}
-		    
 	    	
 	    	// If user chooses to be the client
-	    	Client client = new Client(ipAddress,Integer.parseInt(port));
+	    	Client client = new Client(ipAddress,4440);
 	    	client.connectToServer();
 			// Starts another thread to look for messages from server
 	    	client.start();
